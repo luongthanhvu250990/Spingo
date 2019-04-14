@@ -9,10 +9,10 @@ public abstract class Trigger: MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.tag == "Dot")
+        if (other.gameObject.tag == "Head")
             OnDotTrigger();
 
-        if (other.gameObject.tag == "Paddle")
+        if (other.gameObject.tag == "Bar")
             OnPaddleTrigger();
 
         Debug.LogError(other.name);

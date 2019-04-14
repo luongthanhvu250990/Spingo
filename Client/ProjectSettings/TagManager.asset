@@ -4,8 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Paddle
-  - Dot
+  - Bar
+  - Head
   layers:
   - Default
   - TransparentFX

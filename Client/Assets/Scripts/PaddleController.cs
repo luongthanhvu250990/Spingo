@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+
 
 public class PaddleController : MonoBehaviour
 {
@@ -46,9 +48,12 @@ public class PaddleController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonUp(0)||Input.GetKeyUp(KeyCode.Space)) { 
-            isLeft = !isLeft;
-            Shift();
+        if (Input.GetMouseButtonUp(0)||Input.GetKeyUp(KeyCode.Space)) {
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                isLeft = !isLeft;
+                Shift();
+            }
         }
         SetSize(size);
         Rotate();

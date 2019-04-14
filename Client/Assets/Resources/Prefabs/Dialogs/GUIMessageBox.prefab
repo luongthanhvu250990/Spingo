@@ -195,7 +195,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419310}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -376,7 +376,6 @@ GameObject:
   m_Component:
   - component: {fileID: 22493132}
   - component: {fileID: 22344786}
-  - component: {fileID: 11419310}
   - component: {fileID: 11487426}
   m_Layer: 5
   m_Name: GUIMessageBox
@@ -426,35 +425,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 161
   m_TargetDisplay: 0
---- !u!114 &11419310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 129374}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c015ba5cd3f1ef4a9bcee15a7756795, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogPrev: {fileID: 0}
-  dialogName: 1
-  dialogPrefab: GUIMessageBox
-  isSetupLayer: 0
-  layer: 0
-  hideAction: 0
-  destroyTimeout: 120
-  showDelay: 0
-  showTweenName: show
-  hideTweenName: hide
-  useBlackBackground: 1
-  locationName: UIContent
-  guiControlLocation: {fileID: 177984}
-  status: 0
-  isSetupLocation: 0
-  vectorSetupLocation: {x: 0, y: 0}
-  guiControlDlg: {fileID: 0}
 --- !u!114 &11487426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,7 +637,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419310}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
@@ -968,7 +938,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11419310}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:

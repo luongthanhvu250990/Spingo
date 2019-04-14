@@ -6,8 +6,13 @@ public class InvisibleChecker : MonoBehaviour
 {
     [SerializeField] Camera mainCamera;
     [SerializeField] float offSet = 10;
-    
-  
+
+    private void Start()
+    {
+        if (mainCamera == null)
+            mainCamera = Camera.main;
+    }
+
     void Update()
     {
         Vector2 screenPosition = mainCamera.WorldToScreenPoint(transform.position);
