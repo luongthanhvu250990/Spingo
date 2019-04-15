@@ -8,7 +8,7 @@ public class StageStartDialog : GUIBaseDialogHandler {
 		base.OnBeginShow (parameter);
 	}
 
-	public void Close(){
-		GUIManager.Instance.HideDialog (DialogName.StageStart);
-	}
+	public void OnClickPlay(){
+        GameManager.Instance.StartNewGame();
+    }
 }

@@ -2,14 +2,13 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class MissionDetailDialog : GUIBaseDialogHandler {	
+public class MissionSelectDialog : GUIBaseDialogHandler {	
 	public override void OnBeginShow (object parameter)
 	{		
 		base.OnBeginShow (parameter);
 	}
 
-    public void OnClickPlay()
-    {
-        GameManager.Instance.StartNewGame();        
+    public void OnClickMissionItem() {
+        GUIManager.Instance.ShowDialog(DialogName.MissionDetail);
     }
 }

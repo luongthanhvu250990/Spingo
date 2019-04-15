@@ -15,6 +15,7 @@ public enum DialogName
     StageStart,
 	StageResult,
 	StarResult,	
+    Map,
 }
 
 public enum DialogEvent
@@ -203,7 +204,14 @@ public class GUIManager : SingletonMono<GUIManager>
 			foundDlg.rectCheckers.Add (rect);
 	}
 
-	#if ENABLE_DEBUG_GUI
+    public void HideAllDialogImediately(object parameter = null) {
+        for (int i = 0; i < listDialogs.Count; i++)
+        {
+            listDialogs[i].Hide(parameter, true);
+        }        
+    }
+
+#if ENABLE_DEBUG_GUI
 	void OnGUI(){
 		if (GUI.Button (new Rect (0, 0, 50, 50), "Show")) {
 //			ShowMessageBox (res=>{
@@ -216,10 +224,10 @@ public class GUIManager : SingletonMono<GUIManager>
 			GUIManager.Instance.HideDialog (DialogName.Shop);
 		}
 	}
-	#endif
+#endif
 
-	#region Message Box
-	public static void ShowMessageBox(MessageBox.MessageCallback callback, string caption, string message, MessageBox.ButtonStyle buttonStyle, bool closeOnClickBlackBorder){
+    #region Message Box
+    public static void ShowMessageBox(MessageBox.MessageCallback callback, string caption, string message, MessageBox.ButtonStyle buttonStyle, bool closeOnClickBlackBorder){
 		MessageBox.MessageItem item = new MessageBox.MessageItem ();
 		item.caption = caption;
 		item.message = message;

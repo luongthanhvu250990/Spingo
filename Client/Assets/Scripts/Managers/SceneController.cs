@@ -13,20 +13,25 @@ public class SceneController : SingletonMono<SceneController>
 {
     [SerializeField] Material TransitionMaterial;
     bool lastLoadUsedEff = false;
+    System.Action onLoadSceneFinish;
+
     private void Start()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    public void OpenScene(GameScene scene, bool useEff = true) {
+    public void OpenScene(GameScene scene, bool useEff = true, System.Action onLoadSceneFinish = null) {        
         lastLoadUsedEff = useEff;
-        if(!useEff)
+        this.onLoadSceneFinish = onLoadSceneFinish;
+
+        if (!useEff)
             SceneManager.LoadScene(scene.ToString());
         if (useEff) {          
             PlayHideEffect(()=> {
                 SceneManager.LoadScene(scene.ToString());
             });
         }
+        GUIManager.Instance.HideAllDialogImediately();
     }
 
     public void PlayAppearEffect() {
@@ -40,16 +45,21 @@ public class SceneController : SingletonMono<SceneController>
             DOTween.To(x =>
             {
                 TransitionMaterial.SetFloat("_Cutoff", x);
-            }, 1, 0, 1f);
+            }, 1, 0, 1f).OnComplete(()=> {
+                if (onLoadSceneFinish != null)
+                    onLoadSceneFinish();
+            });
         }
         else {
             TransitionMaterial.SetFloat("_Cutoff", 0);
             TransitionMaterial.SetFloat("_Fade", 0);
+            if (onLoadSceneFinish != null)
+                onLoadSceneFinish();
         }
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    { 
+    {         
         PlayAppearEffect();
     }
 

@@ -5,6 +5,10 @@ using UnityEngine;
 public class HomeScreen : MonoBehaviour
 {
     public void OnClickStories() {
-        SceneController.Instance.OpenScene(GameScene.Gameplay);
+        GUIManager.Instance.ShowDialog(DialogName.Map);       
+    }
+
+    public void OnClickEndlessMode() {
+        GUIManager.Instance.ShowDialog(DialogName.MissionSelect);
     }
 }

@@ -9,4 +9,21 @@ public class HUD : MonoBehaviour
         GUIManager.Instance.ShowDialog(DialogName.Pause);
     }
 
+    public void OnClickShorten() {
+        GameManager.Instance.AddSize(-1);
+    }
+
+    public void OnClickExtend() {
+        GameManager.Instance.AddSize(1);
+    }
+
+    public void OnClickPowerUp()
+    {
+        GameManager.Instance.PowerUp();
+    }
+
+    public void OnClickSlow()
+    {
+        GameManager.Instance.AddSpeed(-100);
+    }
 }

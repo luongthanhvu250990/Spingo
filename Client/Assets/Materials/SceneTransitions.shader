@@ -37,15 +37,7 @@ Shader "Hidden/SceneTransitions"
 					float4 vertex : SV_POSITION;
 				};
 
-				float4 _MainTex_TexelSize;
-
-				v2f simplevert(appdata v)
-				{
-					v2f o;
-					o.vertex = UnityObjectToClipPos(v.vertex);
-					o.uv = v.uv;
-					return o;
-				}
+				float4 _MainTex_TexelSize;			
 
 				v2f vert(appdata v)
 				{
@@ -67,33 +59,7 @@ Shader "Hidden/SceneTransitions"
 
 				sampler2D _MainTex;
 				float _Cutoff;
-				fixed4 _Color;
-
-				fixed4 simplefrag(v2f i) : SV_Target
-				{
-					if (i.uv.x < _Cutoff)
-						return _Color;
-
-					return tex2D(_MainTex, i.uv);
-				}
-
-				fixed4 simplefragopen(v2f i) : SV_Target
-				{
-					if (0.5 - abs(i.uv.y - 0.5) < abs(_Cutoff) * 0.5)
-						return _Color;
-
-					return tex2D(_MainTex, i.uv);
-				}
-
-				fixed4 simpleTexture(v2f i) : SV_Target
-				{
-					fixed4 transit = tex2D(_TransitionTex, i.uv);
-
-					if (transit.b < _Cutoff)
-						return _Color;
-
-					return tex2D(_MainTex, i.uv);
-				}
+				fixed4 _Color;			
 
 				fixed4 frag(v2f i) : SV_Target
 				{
