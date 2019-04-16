@@ -86,7 +86,7 @@ public class GUIDialogBase : MonoBehaviour
 	{		
 		if (dialogType == DialogType.Single) {
 			if (showedDialogList.Count != 0) {
-				if (showedDialogList [0].ShowStatus == DialogStatus.Showed || showedDialogList [0].ShowStatus == DialogStatus.Showing) {
+				if (showedDialogList[0].ShowStatus == DialogStatus.Ok ||showedDialogList[0].ShowStatus == DialogStatus.Showed || showedDialogList [0].ShowStatus == DialogStatus.Showing) {
 					showedDialogList [0].OnUpdateData (parameter);
 					return;
 				} else if (showedDialogList [0].ShowStatus == DialogStatus.Hiding) {			

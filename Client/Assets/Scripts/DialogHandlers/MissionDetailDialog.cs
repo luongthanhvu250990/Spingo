@@ -10,6 +10,6 @@ public class MissionDetailDialog : GUIBaseDialogHandler {
 
     public void OnClickPlay()
     {
-        GameManager.Instance.StartNewGame();        
+        GameManager.Instance.StartNewGame(GameMode.Endless);        
     }
 }

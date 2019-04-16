@@ -7,7 +7,8 @@ using DG.Tweening;
 
 public class PaddleController : MonoBehaviour
 {
-    const float EFFECTED_TIME = 5;
+    public static PaddleController Instance;
+    const float EFFECTED_TIME = 50;
     [SerializeField]
     SpriteRenderer paddle;
     [SerializeField]
@@ -34,19 +35,45 @@ public class PaddleController : MonoBehaviour
     float sizeModifyTime = 0;
     float speedModifyTime = 0;
     float powerUpTime = 0;
-    //Modify status-----------------
+    //End Modify status-----------------
     Transform rotationPoint;
     Vector3 direction;
     public bool IsPause
     {
         get
         {
-            return isPause;
+            return isPause || GameManager.Instance.IsPause;
         }
 
         set
         {
             isPause = value;
+        }
+    }
+
+    public Transform LeftPoint
+    {
+        get
+        {
+            return leftPoint;
+        }
+
+        private set
+        {
+            leftPoint = value;
+        }
+    }
+
+    public Transform RightPoint
+    {
+        get
+        {
+            return rightPoint;
+        }
+
+        private set
+        {
+            rightPoint = value;
         }
     }
 
@@ -58,6 +85,9 @@ public class PaddleController : MonoBehaviour
         return true;
     }
 
+    bool IsPowerUp() {
+        return powerUpTime > 0;
+    }
 
     public bool AddSize(float addVal)
     {
@@ -103,19 +133,30 @@ public class PaddleController : MonoBehaviour
     
     private void Start()
     {
+        Instance = this;
         Shift();
     }
     // Update is called once per frame
     void Update()
     {
         if (IsPause) return;
-        if (Input.GetMouseButtonUp(0)||Input.GetKeyUp(KeyCode.Space)) {
-            if (!EventSystem.current.IsPointerOverGameObject())
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {            
+            if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             {
                 isLeft = !isLeft;
                 Shift();
             }
-        }       
+        }
+
+        //if (Input.GetMouseButtonUp(0)||Input.GetKeyUp(KeyCode.Space)) {
+        //    if (!EventSystem.current.IsPointerOverGameObject())
+        //    {
+
+        //        isLeft = !isLeft;
+        //        Shift();
+        //    }
+        //}       
         Rotate();
 
         CheckSizeModify();
@@ -189,4 +230,49 @@ public class PaddleController : MonoBehaviour
             }
         }
     }
- }
+
+
+    public void OnHeadTrigger(Item item) {
+        if (!IsPowerUp())
+            GameManager.Instance.GameOver();
+        else
+            BreakItem(item);
+    }
+
+    public void OnBarTrigger(Item item)
+    {
+        EatItem(item);
+    }
+
+    void BreakItem(Item item) {        
+        item.Broken();
+        switch (item.ItemType)
+        {
+            case ItemType.Star:
+                GameManager.Instance.EatStar();
+                break;
+            case ItemType.Skull:
+                GameManager.Instance.EatSkull();
+                break;
+            default:
+                GameManager.Instance.IncreaseScore(item.Score);
+                break;
+        }
+    }
+
+    void EatItem(Item item) {
+        item.Eaten();
+        switch (item.ItemType)
+        {           
+            case ItemType.Star:
+                GameManager.Instance.EatStar();
+                break;
+            case ItemType.Skull:
+                GameManager.Instance.EatSkull();
+                break;          
+            default:
+                GameManager.Instance.IncreaseScore(item.Score);
+                break;
+        }
+    }
+}

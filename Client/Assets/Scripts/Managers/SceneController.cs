@@ -23,7 +23,7 @@ public class SceneController : SingletonMono<SceneController>
     public void OpenScene(GameScene scene, bool useEff = true, System.Action onLoadSceneFinish = null) {        
         lastLoadUsedEff = useEff;
         this.onLoadSceneFinish = onLoadSceneFinish;
-
+        GUIManager.Instance.HideAllDialogImediately();
         if (!useEff)
             SceneManager.LoadScene(scene.ToString());
         if (useEff) {          
@@ -31,7 +31,7 @@ public class SceneController : SingletonMono<SceneController>
                 SceneManager.LoadScene(scene.ToString());
             });
         }
-        GUIManager.Instance.HideAllDialogImediately();
+      
     }
 
     public void PlayAppearEffect() {

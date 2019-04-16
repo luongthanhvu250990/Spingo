@@ -17,7 +17,7 @@ public class InvisibleChecker : MonoBehaviour
     {
         Vector2 screenPosition = mainCamera.WorldToScreenPoint(transform.position);
         if (screenPosition.x < offSet || screenPosition.x > (Screen.width - offSet) || screenPosition.y < offSet || screenPosition.y > (Screen.height - offSet))
-            Debug.LogError("=========== " + screenPosition);
+            GameManager.Instance.GameOver();
     }
 
 }

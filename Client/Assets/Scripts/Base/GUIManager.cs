@@ -64,7 +64,17 @@ public class GUIManager : SingletonMono<GUIManager>
         Init();
 	}
 
-	protected void Init ()
+    private void Update()
+    {
+        if (uiCamera == null)
+        {
+            uiCamera = Camera.main;
+
+            blackBorderCanvas.worldCamera = uiCamera;
+        }
+    }
+
+    protected void Init ()
 	{
 		listDialogs = new List<GUIDialogBase>(dialogsTrans.GetComponentsInChildren<GUIDialogBase>());      
 		if (uiCamera == null) {

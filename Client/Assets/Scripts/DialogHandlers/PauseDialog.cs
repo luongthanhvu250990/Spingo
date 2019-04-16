@@ -9,18 +9,18 @@ public class PauseDialog : GUIBaseDialogHandler {
 	{		
 		base.OnBeginShow (parameter);
         soundButton.IsOn = !SoundManager.Instance.IsMuted();
-        GameManager.Instance.SetPause(true);
+        GameManager.Instance.IsPause = true;
     }
 
     public override void OnEndHide()
     {
         base.OnEndHide();
-        GameManager.Instance.SetPause(false);
+        GameManager.Instance.IsPause = false;
     }
 
     public void OnClickHome()
     {
-        HideSelf(null, true);
+        //HideSelf(null, true);
         SceneController.Instance.OpenScene(GameScene.MainMenu);
     }
 
